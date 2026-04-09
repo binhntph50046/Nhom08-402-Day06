@@ -51,7 +51,7 @@ const MovieInfoSection = ({ info }) => {
         context.toggleSaveMovie(movie)
     }
 
-    useTitle(`${info.name} | JoyFilm`)
+    useTitle(`${info.name} | Joy Film`)
 
     const [showMore, setShowMore] = useState(false)
 

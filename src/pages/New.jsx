@@ -13,7 +13,7 @@ const New = () => {
     const [movies, setMovies] = useState(null)
     let { page } = useParams()
 
-    useTitle(`Phim mới cập nhật - Trang ${page} | JoyFilm`)
+    useTitle(`Phim mới cập nhật - Trang ${page} | Joy Film`)
 
     // ------ Fetching Data
     useEffect(() => {

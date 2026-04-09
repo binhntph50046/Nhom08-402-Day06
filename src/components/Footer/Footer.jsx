@@ -9,7 +9,7 @@ const Footer = () => {
             <div className='section-container-no-py flex flex-col-reverse sm:flex-row items-center justify-between'>
                 <Link to="/" className="flex items-center mt-8 sm:mt-0">
                     <img src={logo} className="h-11 mr-2" alt="Logo" />
-                    <img src={joyfilm} className="h-10" alt="JoyFilm" />
+                    <img src={joyfilm} className="h-10" alt="Joy Film" />
                 </Link>
                 <div className='flex flex-col sm:flex-row w-full justify-evenly sm:w-auto items-center'>
                     <Link to='/gioi-thieu' className='footer-link'>Giới thiệu</Link>

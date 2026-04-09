@@ -56,7 +56,7 @@ const MovieMediaSection = ({ info, media, epIndex, svIndex }) => {
         context.toggleSaveMovie(movie)
     }
 
-    useTitle(`${info.name} - Tập ${media[svIndex].server_data[epIndex].name || ""} | JoyFilm`)
+    useTitle(`${info.name} - Tập ${media[svIndex].server_data[epIndex].name || ""} | Joy Film`)
 
     return (
         <div className="section-container pt-16 pb-32">

@@ -28,7 +28,7 @@ const Header = () => {
                             {/* ------ Logo ------ */}
                             <Link to="/" className="flex items-center py-3">
                                 <img src={logo} className="h-8 mr-2" alt="Logo" />
-                                <img src={joyfilm} className="h-7" alt="JoyFilm" />
+                                <img src={joyfilm} className="h-7" alt="Joy Film" />
                             </Link>
 
                             {/* ------ Navigation Links ------ */}

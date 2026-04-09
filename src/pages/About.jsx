@@ -9,7 +9,7 @@ import IntroNewVersion from '../components/IntroNewVersion/IntroNewVersion'
 
 const About = () => {
 
-    useTitle(`Giới thiệu - JoyFilm`)
+    useTitle(`Giới thiệu - Joy Film`)
 
 
     return (
@@ -24,7 +24,7 @@ const About = () => {
                 <div className='intro-left-section'>
                     <div className="h-full flex flex-col justify-center items-center">
                         <img src={logo} className="h-20 md:h-40" alt="Logo" />
-                        <img src={joyfilm} className="h-12 mt-2 md:h-16 md:mt-4" alt="JoyFilm" />
+                        <img src={joyfilm} className="h-12 mt-2 md:h-16 md:mt-4" alt="Joy Film" />
                     </div>
                 </div>
 
@@ -34,10 +34,10 @@ const About = () => {
                         Trải Nghiệm Xem Phim Trực Tuyến Miễn Phí, Chất Lượng Cao và Không Quảng Cáo.
                     </h1>
                     <p className='intro-paragraph'>
-                        JoyFilm là một dự án Fullstack được tạo ra để kết hợp đam mê về lập trình và đam mê về điện ảnh. Website này không chỉ là một sản phẩm để thực hành kỹ năng, mà còn là một cơ hội để mang lại trải nghiệm xem phim tốt nhất cho người dùng.
+                        Joy Film là một dự án Fullstack được tạo ra để kết hợp đam mê về lập trình và đam mê về điện ảnh. Website này không chỉ là một sản phẩm để thực hành kỹ năng, mà còn là một cơ hội để mang lại trải nghiệm xem phim tốt nhất cho người dùng.
                     </p>
                     <p className='intro-paragraph'>
-                        JoyFilm hỗ trợ đa dạng thể loại phim, từ phim lẻ, phim bộ, đến phim chiếu rạp và phim hoạt hình anime. JoyFilm không ngừng phát triển để cung cấp thêm nhiều lựa chọn thú vị như phim hành động, tình cảm, phiêu lưu, TV show, và nhiều thể loại khác.
+                        Joy Film hỗ trợ đa dạng thể loại phim, từ phim lẻ, phim bộ, đến phim chiếu rạp và phim hoạt hình anime. Joy Film không ngừng phát triển để cung cấp thêm nhiều lựa chọn thú vị như phim hành động, tình cảm, phiêu lưu, TV show, và nhiều thể loại khác.
                     </p>
                 </div>
             </div>
@@ -108,7 +108,7 @@ const About = () => {
                         Liên hệ
                     </h1>
                     <p className='intro-paragraph'>
-                        Và tôi là Thế Nghĩa - admin của JoyFilm.
+                        Và tôi là Thế Nghĩa - admin của Joy Film.
                     </p>
                     <p className='intro-paragraph'>
                         Bạn có thể liên hệ với tôi qua các kênh sau :

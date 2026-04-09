@@ -15,9 +15,9 @@ const Search = () => {
     const [searchInput, setSearchInput] = useState((name || ""))
 
     if (!name) {
-        useTitle(`Tìm kiếm | JoyFilm`)
+        useTitle(`Tìm kiếm | Joy Film`)
     } else {
-        useTitle(`Tìm kiếm - "${name}" | JoyFilm`)
+        useTitle(`Tìm kiếm - "${name}" | Joy Film`)
     }
 
     const [movies, setMovies] = useState(null)

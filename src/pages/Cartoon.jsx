@@ -15,7 +15,7 @@ const Cartoon = () => {
     const [movies, setMovies] = useState(null)
     let { page } = useParams()
 
-    useTitle(`Phim hoạt hình - Trang ${page} | JoyFilm`)
+    useTitle(`Phim hoạt hình - Trang ${page} | Joy Film`)
 
     // ------ Fetching Data
     useEffect(() => {

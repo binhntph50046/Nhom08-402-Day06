@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
     // console.log('[Home] Render')
-    useTitle('Trang chủ | JoyFilm')
+    useTitle('Trang chủ | Joy Film')
 
     // ------ Data State
     const [movies, setMovies] = useState(null)

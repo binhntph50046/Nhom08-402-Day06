@@ -1,10 +1,10 @@
-# JoyFilm
+# Joy Film
 
 ## 1. Giới thiệu
 
-- JoyFilm là một nền tảng xem phim trực tuyến miễn phí, chất lượng cao và không chứa quảng cáo gây phiền toái.
+- Joy Film là một nền tảng xem phim trực tuyến miễn phí, chất lượng cao và không chứa quảng cáo gây phiền toái.
 
-- Website này hỗ trợ đa dạng thể loại phim, từ phim lẻ, phim bộ, đến phim chiếu rạp và phim hoạt hình anime. JoyFilm được phát triển theo cơ sở **MERN Stack** (MongoDB, ExpressJS, React, NodeJS).
+- Website này hỗ trợ đa dạng thể loại phim, từ phim lẻ, phim bộ, đến phim chiếu rạp và phim hoạt hình anime. Joy Film được phát triển theo cơ sở **MERN Stack** (MongoDB, ExpressJS, React, NodeJS).
 
 - ***Tuy nhiên tôi đã chuyển sang xây dựng một phiên bản khác sử dụng kết hợp với NextJS - 1 framework nổi tiếng phổ biến của ReactJS, giúp hỗ trợ optimize, SSR, caching, prefetching,...***
 
@@ -12,10 +12,10 @@
 
 - Bạn có thể sử dụng trang web này tại link : [https://**joyfilmz**.vercel.app/](https://joyfilmz.vercel.app/)
 
-- Hoặc cũng có thể sử dụng phiên bản mới nhất xây dựng bằng ***NextJS*** tại : [JoyFilm (NextJS) - https://**myjoyfilm**.vercel.app/](https://myjoyfilm.vercel.app/)
+- Hoặc cũng có thể sử dụng phiên bản mới nhất xây dựng bằng ***NextJS*** tại : [Joy Film (NextJS) - https://**myjoyfilm**.vercel.app/](https://myjoyfilm.vercel.app/)
 
 
-- Repository phiên bản NextJS : [JoyFilm - https://github.com/dothenghia/JoyFilm](https://github.com/dothenghia/JoyFilm)
+- Repository phiên bản NextJS : [Joy Film - https://github.com/dothenghia/JoyFilm](https://github.com/dothenghia/JoyFilm)
 
 - Repository Server: [JoyFilm-Server - https://github.com/dothenghia/JoyFilm-Server](https://github.com/dothenghia/JoyFilm-Server)
 

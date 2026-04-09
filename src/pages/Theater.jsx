@@ -13,7 +13,7 @@ const Theater = () => {
     const [movies, setMovies] = useState(null)
     let { page } = useParams()
 
-    useTitle(`Phim chiếu rạp - Trang ${page} | JoyFilm`)
+    useTitle(`Phim chiếu rạp - Trang ${page} | Joy Film`)
 
     // ------ Fetching Data
     useEffect(() => {

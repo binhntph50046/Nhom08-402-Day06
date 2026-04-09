@@ -13,7 +13,7 @@ const Single = () => {
     const [movies, setMovies] = useState(null)
     let { page } = useParams()
 
-    useTitle(`Phim lẻ - Trang ${page} | JoyFilm`)
+    useTitle(`Phim lẻ - Trang ${page} | Joy Film`)
 
     // ------ Fetching Data
     useEffect(() => {

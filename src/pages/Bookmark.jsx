@@ -8,7 +8,7 @@ const Bookmark = () => {
     const context = useContext(saveContext)
     // console.log(context.saveList)
 
-    useTitle(`Phim đã lưu (${context.saveList.length}) - JoyFilm`)
+    useTitle(`Phim đã lưu (${context.saveList.length}) - Joy Film`)
 
     return (
         <div id="series" className="page-container-0topside">
