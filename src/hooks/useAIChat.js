@@ -1,8 +1,10 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
+
+const API_URL = 'http://localhost:8000/api/v1/recommend';
 
 /**
  * Custom hook to manage AI Chat logic
- * Includes message state, sending logic, and typing status
+ * Calls the backend API for movie recommendations based on user mood
  */
 export const useAIChat = () => {
     const [messages, setMessages] = useState([
@@ -10,13 +12,15 @@ export const useAIChat = () => {
             id: 'welcome',
             role: 'ai',
             content: 'Xin chào! Tôi là Joy Film. Bạn đang cảm thấy thế nào? Hãy để tôi gợi ý cho bạn bộ phim phù hợp nhất nhé! 🍿',
+            movies: [],
             timestamp: new Date(),
         },
     ]);
     const [isTyping, setIsTyping] = useState(false);
+    const threadIdRef = useRef(null);
 
     /**
-     * Sends a message and triggers a mocked AI response
+     * Sends a message to the backend API and processes the response
      * @param {string} content - User message content
      */
     const sendMessage = useCallback(async (content) => {
@@ -27,6 +31,7 @@ export const useAIChat = () => {
             id: Date.now().toString(),
             role: 'user',
             content: content.trim(),
+            movies: [],
             timestamp: new Date(),
         };
 
@@ -34,26 +39,50 @@ export const useAIChat = () => {
         setIsTyping(true);
 
         try {
-            // 2. Simulate AI "Thinking" state (1.5s - 3s delay)
-            const delay = Math.floor(Math.random() * 1500) + 1500;
-            await new Promise((resolve) => setTimeout(resolve, delay));
+            // 2. Call the backend API
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_story: content.trim(),
+                    thread_id: threadIdRef.current || 'default',
+                }),
+            });
 
-            // 3. Mock AI Response Logic
-            // In a real app, this would call an API (e.g., GPT-4 or Gemini)
+            if (!response.ok) {
+                throw new Error(`API error: ${response.status}`);
+            }
+
+            const result = await response.json();
+
+            // Save thread_id for conversation continuity
+            if (!threadIdRef.current) {
+                threadIdRef.current = 'default';
+            }
+
+            // 3. Parse API response
+            const counselorMessage = result?.data?.counselor_message || 'Cảm ơn bạn đã chia sẻ!';
+            const recommendedMovies = result?.data?.recommended_movies || [];
+
             const aiResponse = {
                 id: (Date.now() + 1).toString(),
                 role: 'ai',
-                content: getMockedResponse(content),
+                content: counselorMessage,
+                movies: recommendedMovies,
                 timestamp: new Date(),
             };
 
             setMessages((prev) => [...prev, aiResponse]);
         } catch (error) {
-            console.error('Error sending message:', error);
+            console.error('Error calling API:', error);
             const errorMessage = {
-                id: Date.now().toString(),
+                id: (Date.now() + 2).toString(),
                 role: 'ai',
-                content: 'Rất tiếc, đã có lỗi xảy ra. Vui lòng thử lại sau!',
+                content: 'Rất tiếc, đã có lỗi xảy ra khi kết nối với server. Vui lòng kiểm tra backend đã chạy chưa và thử lại! 🔧',
+                movies: [],
                 timestamp: new Date(),
             };
             setMessages((prev) => [...prev, errorMessage]);
@@ -67,26 +96,4 @@ export const useAIChat = () => {
         isTyping,
         sendMessage,
     };
-};
-
-/**
- * Basic logic to simulate "intelligent" responses based on keywords
- */
-const getMockedResponse = (input) => {
-    const text = input.toLowerCase();
-
-    if (text.includes('vui') || text.includes('happy')) {
-        return 'Thật tuyệt! Nếu bạn đang vui, một bộ phim hài nhẹ nhàng hoặc hoạt hình như "Despicable Me" hay "The Super Mario Bros. Movie" sẽ rất hợp đấy!';
-    }
-    if (text.includes('buồn') || text.includes('sad')) {
-        return 'Tôi hiểu mà... Những lúc này một bộ phim chữa lành tâm hồn (healing) như "The Pursuit of Happyness" hay một bộ phim hoạt hình Ghibli sẽ là lựa chọn tốt.';
-    }
-    if (text.includes('sợ') || text.includes('kinh dị')) {
-        return 'À, bạn muốn thử thách lòng dũng cảm à? Đang có các phim như "The Conjuring" hay "Insidious" rất hot đấy. Bạn có muốn xem thêm gợi ý không?';
-    }
-    if (text.includes('hành động') || text.includes('action')) {
-        return 'Action ư? Đừng bỏ lỡ "John Wick" hay các phim siêu anh hùng Marvel nhé! Cảm giác cực kỳ bùng nổ.';
-    }
-
-    return 'Cảm ơn bạn đã chia sẻ! Hiện tại tôi đang tìm kiếm kho phim tốt nhất dựa trên ý kiến của bạn. Bạn còn muốn chia sẻ thêm gì không?';
 };

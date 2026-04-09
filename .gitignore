@@ -8,7 +8,10 @@ pnpm-debug.log*
 lerna-debug.log*
 znote.md
 
+backend/
+backend/.venv/
 node_modules
+node_modules/
 dist
 dist-ssr
 *.local

@@ -1,8 +1,79 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Sparkles, Bot } from 'lucide-react';
+import { MessageSquare, X, Send, Sparkles, Bot, Star, Clock, Film, Calendar } from 'lucide-react';
 import { useAIChat } from '../../hooks/useAIChat';
 import './AIChatMate.scss';
+
+/**
+ * MovieCard component to display a recommended movie
+ */
+const MovieCard = ({ movie, index }) => {
+    const rating = parseFloat(movie.vote_average) || 0;
+    const ratingDisplay = rating > 0 ? rating.toFixed(1) : 'N/A';
+
+    return (
+        <motion.div
+            className="movie-card"
+            initial={{ opacity: 0, y: 15, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: index * 0.1, duration: 0.3 }}
+        >
+            <div className="movie-card-header">
+                <div className="movie-rank">#{index + 1}</div>
+                <h4 className="movie-title">{movie.title}</h4>
+            </div>
+
+            <div className="movie-meta">
+                {movie.release_year && (
+                    <span className="meta-tag">
+                        <Calendar size={12} />
+                        {movie.release_year}
+                    </span>
+                )}
+                {movie.duration && (
+                    <span className="meta-tag">
+                        <Clock size={12} />
+                        {movie.duration}
+                    </span>
+                )}
+                {rating > 0 && (
+                    <span className="meta-tag rating-tag">
+                        <Star size={12} />
+                        {ratingDisplay}
+                    </span>
+                )}
+                {movie.type && (
+                    <span className="meta-tag type-tag">
+                        <Film size={12} />
+                        {movie.type}
+                    </span>
+                )}
+            </div>
+
+            {movie.genres && (
+                <div className="movie-genres">
+                    {movie.genres.split(',').slice(0, 3).map((genre, i) => (
+                        <span key={i} className="genre-chip">{genre.trim()}</span>
+                    ))}
+                </div>
+            )}
+
+            {movie.description && (
+                <p className="movie-desc">
+                    {movie.description.length > 120
+                        ? movie.description.substring(0, 120) + '...'
+                        : movie.description}
+                </p>
+            )}
+
+            {movie.director && movie.director !== 'N/A' && (
+                <div className="movie-director">
+                    🎬 <span>{movie.director}</span>
+                </div>
+            )}
+        </motion.div>
+    );
+};
 
 const AIChatMate = () => {
     const [isOpen, setIsOpen] = useState(true);
@@ -96,14 +167,39 @@ const AIChatMate = () => {
                         {/* Message List */}
                         <div className="chat-messages">
                             {messages.map((msg) => (
-                                <motion.div
-                                    key={msg.id}
-                                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    className={`message ${msg.role}`}
-                                >
-                                    {msg.content}
-                                </motion.div>
+                                <div key={msg.id} className="message-group">
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        className={`message ${msg.role}`}
+                                    >
+                                        {msg.content}
+                                    </motion.div>
+
+                                    {/* Render Movie Recommendations */}
+                                    {msg.movies && msg.movies.length > 0 && (
+                                        <motion.div
+                                            className="movies-container"
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: 0.2 }}
+                                        >
+                                            <div className="movies-header">
+                                                <Sparkles size={14} />
+                                                <span>Phim gợi ý cho bạn</span>
+                                            </div>
+                                            <div className="movies-list">
+                                                {msg.movies.map((movie, idx) => (
+                                                    <MovieCard
+                                                        key={movie.show_id || idx}
+                                                        movie={movie}
+                                                        index={idx}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </div>
                             ))}
 
                             {/* Typing Indicator */}
@@ -126,7 +222,7 @@ const AIChatMate = () => {
                             <div className="input-wrapper">
                                 <input
                                     type="text"
-                                    placeholder="Hỏi tôi bất cứ điều gì về phim..."
+                                    placeholder="Chia sẻ tâm trạng của bạn..."
                                     value={inputValue}
                                     onChange={(e) => setInputValue(e.target.value)}
                                     onKeyDown={handleKeyDown}
