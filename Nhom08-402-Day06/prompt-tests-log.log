@@ -1,0 +1,69 @@
+=== ĐANG KHỞI TẠO LANGGRAPH AGENT & LOAD DATA ===
+=== KHỞI TẠO THÀNH CÔNG ===
+INFO:     Will watch for changes in these directories: ['/home/bear/Documents/Workspace/Intern_VIN/assignments/Nhom08-402-Day06']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [269912] using StatReload
+=== ĐANG KHỞI TẠO LANGGRAPH AGENT & LOAD DATA ===
+=== KHỞI TẠO THÀNH CÔNG ===
+=== ĐANG KHỞI TẠO LANGGRAPH AGENT & LOAD DATA ===
+=== KHỞI TẠO THÀNH CÔNG ===
+INFO:     Started server process [269956]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+--- [NODE] Trích xuất cảm xúc ---
+[DEBUG] Confidence Score: 0.3
+--- [NODE] Yêu cầu cung cấp thêm thông tin ---
+INFO:     127.0.0.1:34828 - "POST /api/v1/recommend HTTP/1.1" 200 OK
+--- [NODE] Trích xuất cảm xúc ---
+[DEBUG] Confidence Score: 0.5
+--- [NODE] Yêu cầu cung cấp thêm thông tin ---
+INFO:     127.0.0.1:55228 - "POST /api/v1/recommend HTTP/1.1" 200 OK
+--- [NODE] Trích xuất cảm xúc ---
+[DEBUG] Confidence Score: 0.0
+--- [NODE] Yêu cầu cung cấp thêm thông tin ---
+INFO:     127.0.0.1:49434 - "POST /api/v1/recommend HTTP/1.1" 200 OK
+--- [NODE] Trích xuất cảm xúc ---
+[DEBUG] Confidence Score: 0.5
+--- [NODE] Yêu cầu cung cấp thêm thông tin ---
+INFO:     127.0.0.1:54940 - "POST /api/v1/recommend HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46546 - "POST /api/v1/recommend HTTP/1.1" 422 Unprocessable Entity
+--- [NODE] Trích xuất cảm xúc ---
+[DEBUG] Confidence Score: 0.9
+--- [NODE] Lọc ứng viên thô từ JSON ---
+[TOOL] Đã lấy 20 phim ứng viên đưa cho LLM.
+--- [NODE] LLM tự chấm điểm & chọn Top 15 ---
+[DEBUG] Các ID mà LLM đã chọn: ['37799', '44115', '46738', '38167', '46705', '38575', '23168', '44214', '52629', '47931', '43347', '26022', '20662', '41733', '38234']
+--- [NODE] Tổng hợp câu trả lời thấu cảm ---
+INFO:     127.0.0.1:52014 - "POST /api/v1/recommend HTTP/1.1" 200 OK
+--- [NODE] Trích xuất cảm xúc ---
+[DEBUG] Confidence Score: 0.9
+--- [NODE] Lọc ứng viên thô từ JSON ---
+[TOOL] Đã lấy 20 phim ứng viên đưa cho LLM.
+--- [NODE] LLM tự chấm điểm & chọn Top 15 ---
+[DEBUG] Các ID mà LLM đã chọn: ['61979', '46705', '38167', '43347', '43949', '24021', '44115', '46738', '22538', '37799', '23168', '44214', '52629', '47931', '11324']
+--- [NODE] Tổng hợp câu trả lời thấu cảm ---
+INFO:     127.0.0.1:55546 - "POST /api/v1/recommend HTTP/1.1" 200 OK
+--- [NODE] Trích xuất cảm xúc ---
+[DEBUG] Confidence Score: 0.9
+--- [NODE] Lọc ứng viên thô từ JSON ---
+[TOOL] Đã lấy 20 phim ứng viên đưa cho LLM.
+--- [NODE] LLM tự chấm điểm & chọn Top 15 ---
+[DEBUG] Các ID mà LLM đã chọn: ['37799', '38167', '43347', '46705', '44115', '46738', '44214', '61979', '24021', '38575', '23168', '47931', '52629', '20662', '41733']
+--- [NODE] Tổng hợp câu trả lời thấu cảm ---
+INFO:     127.0.0.1:38040 - "POST /api/v1/recommend HTTP/1.1" 200 OK
+--- [NODE] Trích xuất cảm xúc ---
+[DEBUG] Confidence Score: 0.8
+--- [NODE] Lọc ứng viên thô từ JSON ---
+[TOOL] Đã lấy 20 phim ứng viên đưa cho LLM.
+--- [NODE] LLM tự chấm điểm & chọn Top 15 ---
+[DEBUG] Các ID mà LLM đã chọn: ['10192', '38575', '20352', '10193', '37799', '23168', '38055', '27578', '44214', '52629', '26389', '27581', '38365', '34851', '24021']
+--- [NODE] Tổng hợp câu trả lời thấu cảm ---
+INFO:     127.0.0.1:51778 - "POST /api/v1/recommend HTTP/1.1" 200 OK
+--- [NODE] Trích xuất cảm xúc ---
+[DEBUG] Confidence Score: 0.9
+--- [NODE] Lọc ứng viên thô từ JSON ---
+[TOOL] Đã lấy 20 phim ứng viên đưa cho LLM.
+--- [NODE] LLM tự chấm điểm & chọn Top 15 ---
+[DEBUG] Các ID mà LLM đã chọn: ['11324', '44214', '46738', '46705', '44115', '52629', '47931', '61979', '23168', '44918', '48650', '24021', '22538', '38167', '26022']
+--- [NODE] Tổng hợp câu trả lời thấu cảm ---
+INFO:     127.0.0.1:50750 - "POST /api/v1/recommend HTTP/1.1" 200 OK
