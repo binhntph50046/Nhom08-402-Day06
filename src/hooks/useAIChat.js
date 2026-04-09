@@ -1,8 +1,8 @@
 import { useState, useCallback, useRef } from 'react';
 import { useRecommend } from '../contexts/recommendContext';
 
-// const API_URL = 'http://localhost:8000/api/v1/recommend';
-const API_URL = 'https://newspaperish-unmelting-anissa.ngrok-free.dev/api/v1/recommend';
+const API_URL = 'http://localhost:8000/api/v1/recommend';
+// const API_URL = 'https://newspaperish-unmelting-anissa.ngrok-free.dev/api/v1/recommend';
 
 
 
