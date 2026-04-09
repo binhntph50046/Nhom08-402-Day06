@@ -18,11 +18,13 @@ const Movie = lazy(() => import("./pages/Movie"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 import { SaveProvider } from '../src/contexts/saveContext.jsx'
+import { RecommendProvider } from './contexts/recommendContext.jsx'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 
 export default function App() {
     return (
         // Config router for application
+        <RecommendProvider>
         <SaveProvider>
 
             <BrowserRouter>
@@ -113,6 +115,7 @@ export default function App() {
                 </ScrollToTop>
             </BrowserRouter >
         </SaveProvider>
+        </RecommendProvider>
     );
 }
 

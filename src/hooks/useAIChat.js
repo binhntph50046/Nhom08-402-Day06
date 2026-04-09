@@ -1,6 +1,10 @@
 import { useState, useCallback, useRef } from 'react';
+import { useRecommend } from '../contexts/recommendContext';
 
-const API_URL = 'http://localhost:8000/api/v1/recommend';
+// const API_URL = 'http://localhost:8000/api/v1/recommend';
+const API_URL = 'https://newspaperish-unmelting-anissa.ngrok-free.dev/api/v1/recommend';
+
+
 
 /**
  * Custom hook to manage AI Chat logic
@@ -11,13 +15,14 @@ export const useAIChat = () => {
         {
             id: 'welcome',
             role: 'ai',
-            content: 'Xin chào! Tôi là Joy Film. Bạn đang cảm thấy thế nào? Hãy để tôi gợi ý cho bạn bộ phim phù hợp nhất nhé! 🍿',
+            content: 'Xin chào! Tôi là Joy Film 🎬 Bạn đang cảm thấy thế nào? Hãy chia sẻ tâm trạng để tôi gợi ý phim phù hợp nhất nhé! 🍿',
             movies: [],
             timestamp: new Date(),
         },
     ]);
     const [isTyping, setIsTyping] = useState(false);
     const threadIdRef = useRef(null);
+    const { setRecommendedMovies } = useRecommend();
 
     /**
      * Sends a message to the backend API and processes the response
@@ -76,6 +81,11 @@ export const useAIChat = () => {
             };
 
             setMessages((prev) => [...prev, aiResponse]);
+
+            // 4. Push recommended movies to shared context (for UI pages)
+            if (recommendedMovies.length > 0) {
+                setRecommendedMovies(recommendedMovies);
+            }
         } catch (error) {
             console.error('Error calling API:', error);
             const errorMessage = {
@@ -89,7 +99,7 @@ export const useAIChat = () => {
         } finally {
             setIsTyping(false);
         }
-    }, []);
+    }, [setRecommendedMovies]);
 
     return {
         messages,

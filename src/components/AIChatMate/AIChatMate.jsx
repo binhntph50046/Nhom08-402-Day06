@@ -1,77 +1,58 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, Sparkles, Bot, Star, Clock, Film, Calendar } from 'lucide-react';
+import { X, Send, Sparkles, Bot, Star, Clock, Film, Calendar } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router-dom';
+import { slugify } from '../../functions/slugify';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import phd from '../../assets/placeholder.png';
 import { useAIChat } from '../../hooks/useAIChat';
 import './AIChatMate.scss';
 
 /**
- * MovieCard component to display a recommended movie
+ * MovieCard component to display a recommended movie inside chat
  */
 const MovieCard = ({ movie, index }) => {
     const rating = parseFloat(movie.vote_average) || 0;
     const ratingDisplay = rating > 0 ? rating.toFixed(1) : 'N/A';
+    const slug = slugify(movie.title);
+    const thumbUrl = `https://loremflickr.com/300/450/movie,poster,${slug}`;
 
     return (
-        <motion.div
-            className="movie-card"
-            initial={{ opacity: 0, y: 15, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: index * 0.1, duration: 0.3 }}
-        >
-            <div className="movie-card-header">
-                <div className="movie-rank">#{index + 1}</div>
-                <h4 className="movie-title">{movie.title}</h4>
-            </div>
-
-            <div className="movie-meta">
-                {movie.release_year && (
-                    <span className="meta-tag">
-                        <Calendar size={12} />
-                        {movie.release_year}
-                    </span>
-                )}
-                {movie.duration && (
-                    <span className="meta-tag">
-                        <Clock size={12} />
-                        {movie.duration}
-                    </span>
-                )}
-                {rating > 0 && (
-                    <span className="meta-tag rating-tag">
-                        <Star size={12} />
-                        {ratingDisplay}
-                    </span>
-                )}
-                {movie.type && (
-                    <span className="meta-tag type-tag">
-                        <Film size={12} />
-                        {movie.type}
-                    </span>
-                )}
-            </div>
-
-            {movie.genres && (
-                <div className="movie-genres">
-                    {movie.genres.split(',').slice(0, 3).map((genre, i) => (
-                        <span key={i} className="genre-chip">{genre.trim()}</span>
-                    ))}
+        <Link to={`/phim/${slug}`} className="chat-movie-card-link">
+            <motion.div
+                className="chat-movie-card"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.1 }}
+            >
+                <div className="poster-wrapper">
+                    <LazyLoadImage
+                        src={thumbUrl}
+                        placeholderSrc={phd}
+                        alt={movie.title}
+                        effect="blur"
+                        className="poster-img"
+                    />
+                    <div className="poster-overlay">
+                        <svg className="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                    </div>
+                    {rating > 0 && (
+                        <div className="card-rating">
+                            <Star size={10} fill="#fbbf24" color="#fbbf24" />
+                            <span>{ratingDisplay}</span>
+                        </div>
+                    )}
                 </div>
-            )}
-
-            {movie.description && (
-                <p className="movie-desc">
-                    {movie.description.length > 120
-                        ? movie.description.substring(0, 120) + '...'
-                        : movie.description}
-                </p>
-            )}
-
-            {movie.director && movie.director !== 'N/A' && (
-                <div className="movie-director">
-                    🎬 <span>{movie.director}</span>
+                <div className="card-info">
+                    <h4 className="title">{movie.title}</h4>
+                    <p className="meta">{movie.release_year} • {movie.type === 'Movie' ? 'Phim Lẻ' : 'Phim Bộ'}</p>
                 </div>
-            )}
-        </motion.div>
+            </motion.div>
+        </Link>
     );
 };
 
@@ -173,7 +154,13 @@ const AIChatMate = () => {
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
                                         className={`message ${msg.role}`}
                                     >
-                                        {msg.content}
+                                        {msg.role === 'ai' ? (
+                                            <div className="markdown-content">
+                                                <ReactMarkdown>{msg.content}</ReactMarkdown>
+                                            </div>
+                                        ) : (
+                                            msg.content
+                                        )}
                                     </motion.div>
 
                                     {/* Render Movie Recommendations */}
@@ -186,9 +173,9 @@ const AIChatMate = () => {
                                         >
                                             <div className="movies-header">
                                                 <Sparkles size={14} />
-                                                <span>Phim gợi ý cho bạn</span>
+                                                <span>Gợi ý cho bạn</span>
                                             </div>
-                                            <div className="movies-list">
+                                            <div className="horizontal-movies-list">
                                                 {msg.movies.map((movie, idx) => (
                                                     <MovieCard
                                                         key={movie.show_id || idx}
